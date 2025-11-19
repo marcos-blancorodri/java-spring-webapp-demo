@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Sponsors</title>
+    <!-- Mantenemos la referencia a tu CSS personalizado -->
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<!-- 1. Barra de navegación estándar -->
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<!-- 2. Contenedor principal para el contenido -->
+<div class="content-container">
+
+    <!-- 3. Título de la página con la clase 'lista' -->
+    <div class="lista">
+        <h1>Sponsors</h1>
+    </div>
+
+    <!-- 4. Tabla con el estilo correcto -->
+    <table>
+        <tr>
+
+            <th>Nombre</th>
+            <th>CIF</th>
+            <th th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">Acciones</th>
+        </tr>
+        <tr th:each="sponsor : ${sponsors}">
+            <td th:text="${sponsor.nombre}">Nombre</td>
+            <td th:text="${sponsor.cif}">CIF</td>
+
+            <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/sponsor/update/{cif}(cif=${sponsor.cif})}"
+                   class="botones">
+                    Editar
+                </a>
+                <a th:href="@{/sponsor/delete/{cif}(cif=${sponsor.cif})}"
+                   class="botones"
+                   th:onclick="return confirm('¿Estás seguro de que quieres borrar el sponsor \'' + [[${sponsor.nombre}]] + '\'? Esta acción no se puede deshacer.');">
+                    Borrar
+                </a>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="lista" th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+        <a th:href="@{/sponsor/add}" class="botones">Añadir Nuevo Sponsor</a>
+    </div>
+
+    <div class="lista">
+        <a th:href="@{/competicion/list}" class="botones">Volver a la lista de competiciones</a>
+    </div>
+    <div class="lista">
+        <a th:href="@{/}" class="botones">Volver al incio</a>
+    </div>
+
+</div> <!-- Fin del content-container -->
+
+</body>
+</html>

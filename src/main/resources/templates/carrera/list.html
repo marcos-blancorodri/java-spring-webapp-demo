@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carreras de la Competición</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Carreras</h1></div>
+<!-- Mostrar botón para añadir carrera solo si es promotor -->
+
+
+<table>
+    <tr>
+        <td>Nombre</td>
+        <td>Longitud(Km)</td>
+        <td>Fecha</td>
+        <td>Precio(€)</td>
+    </tr>
+    <tr th:each="carrera : ${carreras}">
+        <td th:text="${carrera.nombre}">Nombre</td>
+        <td th:text="${carrera.longitud}">Longitud(en KM)</td>
+        <td th:text="${#temporals.format(carrera.fecha,'dd-MM-yyyy')}">Fecha</td>
+        <td th:text="${carrera.precio}">Precio(€)</td>
+        <td> <input type="hidden" th:value="*{carrera.idCarrera}"/></td>
+        <td>
+            <!-- Botón de inscripción para usuarios normales -->
+            <a th:if="${session.usuario != null and session.usuario.tipo == 'normal'}"
+               th:href="@{/inscripcion/add/{id}(id=${carrera.idCarrera})}" class="botones">
+                Inscribirse
+            </a>
+        </td>
+        <td>
+            <!-- Botón de editar para promotores -->
+            <a th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}"
+               th:href="@{/carrera/update/{id}(id=${carrera.idCarrera})}" class="botones">
+                Editar
+            </a>
+        </td>
+        <td>
+            <!-- Botón de borrar para promotores -->
+            <a th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}"
+               th:href="@{/carrera/delete/{id}(id=${carrera.idCarrera})}"
+                th:onclick="return confirm('Estàs segur d\'esborrar la carrera \''
+                [[${carrera.idCarrera}]] + '\'?');" class="botones">
+                Borrar
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/inscripcion/list/{id}(id=${carrera.idCarrera})}" class="botones">
+                Ver participantes
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/puntoControl/list/{id}(id=${carrera.idCarrera})}" class="botones">
+                Ver puntosControl
+            </a>
+        </td>
+    </tr>
+</table>
+    <div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}" class="lista">
+        <a th:href="@{/carrera/add/{id}(id=${idCompeticion})}" class="botones">Añadir carrera</a>
+    </div>
+<div class="lista">
+    <a th:href="@{/competicion/list}" class="botones">Volver a competiciones</a>
+</div>
+
+<div class="lista">
+    <a th:href="@{/}" class="botones">Volver inicio</a>
+</div>
+</div>
+</body>
+</html>

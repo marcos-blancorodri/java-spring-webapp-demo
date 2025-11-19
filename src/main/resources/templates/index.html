@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Mountain Racers</title>
+    <link type="text/css" th:href="@{/css/estilosIndex.css}" href="/css/estilosIndex.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="lista">
+    <h2 > Bienvenidos a Mountain Racers</h2>
+    <img src="/imagenes/logo.jpeg" alt="Logo" width="200" height="200">
+
+    <div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+        <h2>Gestión Promotor</h2>
+        <ul>
+            <li><a th:href="@{/competicion/list}">Ver competiciones</a></li>
+            <li><a th:href="@{/voluntario/list}">Gestionar voluntarios</a></li>
+            <li><a th:href="@{/sponsor/list}">Gestionar sponsors</a></li>
+            <li class="botones" th:if="${session.usuario != null}"><a href="/logout">Cerrar sesión</a></li>
+        </ul>
+    </div>
+
+    <div th:if="${session.usuario != null and session.usuario.tipo == 'normal'}">
+        <h2>Gestión Atleta</h2>
+        <ul>
+            <li><a th:href="@{/competicion/list}">Ver competiciones</a></li>
+            <li><a href="/registroTiempo/list">Ver Mis Resultados</a></li>
+
+            <li class="botones" th:if="${session.usuario != null}"><a href="/logout">Cerrar sesión</a></li>
+        </ul>
+    </div>
+
+
+    <div th:if="${session.usuario == null}">
+        <h2>Información Pública</h2>
+        <ul>
+            <li><a th:href="@{/competicion/list}">Ver competiciones</a></li>
+            <li class="botones"><a href="/voluntario/list"> Ver Voluntarios</a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="contenedor-fondo">
+    <img src="ruta/a/tu/imagen_transparente.png"  class="imagen-transparente">
+</div>
+</body>
+</html>

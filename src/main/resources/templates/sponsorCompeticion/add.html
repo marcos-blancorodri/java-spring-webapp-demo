@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignar Sponsor</title>
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+
+    <h2>Asignar Sponsor a <span th:text="${competicion.nombre}"></span></h2>
+
+    <form action="#" th:action="@{/sponsorCompeticion/add}" th:object="${sponsorCompeticion}" method="post">
+        <input type="hidden" th:field="*{idCompeticion}" />
+
+        <div class="form-group">
+            <label for="cifSponsor">Selecciona un Sponsor:</label>
+            <select id="cifSponsor" th:field="*{cifSponsor}">
+                <option value="">-- Elige un sponsor --</option>
+                <option th:each="sponsor : ${sponsorsDisponibles}"
+                        th:text="${sponsor.nombre + ' (' + sponsor.cif + ')'}"
+                        th:value="${sponsor.cif}">
+                </option>
+            </select>
+        </div>
+
+        <div class="error-message" th:if="${#lists.isEmpty(sponsorsDisponibles)}">
+            <p>No hay más sponsors disponibles para asignar.</p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones" th:disabled="${#lists.isEmpty(sponsorsDisponibles)}">
+                Asignar Sponsor
+            </button>
+            <a th:href="@{/sponsorCompeticion/list/{idCompeticion}(idCompeticion=${competicion.idCompeticion})}" class="botones">
+                Volver
+            </a>
+        </div>
+    </form>
+
+    <hr style="margin-top: 40px; border-color: #ddd;">
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="margin-bottom: 10px;">¿El sponsor no está en la lista?</p>
+        <a th:href="@{/sponsor/add}" class="botones">Crear Nuevo Sponsor</a>
+    </div>
+
+</div>
+</body>
+</html>

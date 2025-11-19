@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Voluntarios de la Competición</title>
+    <!-- Usamos el mismo fichero CSS para que se vea igual -->
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+
+<nav>
+    <a href="/" ><img th:src="@{/imagenes/logo.jpeg}" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<!-- El título, dentro de un div con class="lista" para que se centre -->
+<div class="lista">
+    <h1>Voluntarios para <span th:text="${competicion.nombre}"></span></h1>
+</div>
+
+<!-- Tabla con la misma estructura que la otra lista -->
+<table>
+    <!-- Cabecera de la tabla (usando <td> como en tu ejemplo) -->
+    <tr>
+        <td>ID Voluntario</td>
+        <td>Nombre</td>
+        <td>Asignar</td>
+        <td>Desinscribir</td>
+    </tr>
+    <!-- Filas con los datos de cada voluntario -->
+    <tr th:each="voluntario : ${voluntarios}">
+        <td th:text="${voluntario.idVoluntario}">ID</td>
+        <td th:text="${voluntario.nombre}">Nombre</td>
+
+        <!-- Celda para el botón de Asignar Tareas -->
+        <td>
+            <a th:href="@{/voluntarioPuntoControl/manage/{idCompeticion}/{idVoluntario}(idCompeticion=${competicion.idCompeticion}, idVoluntario=${voluntario.idVoluntario})}" class="botones">Asignar Tareas</a>
+        </td>
+
+        <!-- Celda para el botón de Dar de Baja -->
+        <td>
+            <a th:href="@{/voluntario/delete/{idCompeticion}/{idVoluntario}(idCompeticion=${competicion.idCompeticion}, idVoluntario=${voluntario.idVoluntario})}" class="botones">Dar de Baja</a>
+        </td>
+    </tr>
+</table>
+
+<!-- Mensaje que aparece si no hay voluntarios -->
+<div th:if="${voluntarios == null or voluntarios.isEmpty()}" class="lista">
+    <p>Todavía no hay voluntarios inscritos en esta competición.</p>
+</div>
+
+
+<!-- Botones de acción inferiores, cada uno en su propio div.lista -->
+<div class="lista">
+    <a th:href="@{/voluntario/inscribir/{idCompeticion}(idCompeticion=${competicion.idCompeticion})}" class="botones">Inscribir Nuevo Voluntario</a>
+</div>
+
+<div class="lista">
+    <a th:href="@{/competicion/list}" class="botones">Volver a Competiciones</a>
+</div>
+</div>
+</body>
+</html>

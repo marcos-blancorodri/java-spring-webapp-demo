@@ -1,0 +1,16 @@
+
+<div th:fragment="loginInfo" class="loggeduser" xmlns:th="http://www.w3.org/1999/xhtml">
+  <p  style="color: #ffffff; " th:if="${session.usuario == null}"> <!-- Usa session.usuario directamente -->
+    No autentificado <a th:href="@{/login}">Entrar</a>
+  </p>
+  <div th:unless="${session.usuario == null}">
+    <p style="color: #ffffff;" th:if="${session.usuario?.tipo == 'promotor'}"> <!-- Accede al atributo tipo -->
+      Logeado como <strong>Promotor</strong>
+      <a th:href="@{/logout}">Salir</a>
+    </p>
+    <p style="color: #ffffff;" th:if="${session.usuario?.tipo == 'normal'}">
+      Logeado como <strong>Atleta</strong>
+      <a th:href="@{/logout}">Salir</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Voluntarios</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Voluntarios</h1></div>
+<!-- Solo visible para promotores -->
+
+
+<table>
+    <tr>
+        <td>Id Voluntario</td>
+        <td>Nombre</td>
+        <td>Fecha Nacimiento</td>
+        <td>Genero</td>
+        <td>Email</td>
+    </tr>
+    <tr th:each="voluntario : ${voluntarios}">
+        <td th:text="${voluntario.idVoluntario}">idVoluntario</td>
+        <td th:text="${voluntario.nombre}">Nombre</td>
+        <td th:text="${#temporals.format(voluntario.fecha_nacimiento,'dd-MM-yyyy')}">Edad</td>
+        <td th:text="${voluntario.genero}">Genero</td>
+        <td th:text="${voluntario.email}">Email</td>
+
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/voluntario/update/{id}(id=${voluntario.idVoluntario})}" class="botones">Modificar</a>
+            </span>
+        </td>
+
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/voluntario/delete/{id}(id=${voluntario.idVoluntario})}" class="botones">Borrar</a>
+            </span>
+        </td>
+
+    </tr>
+</table>
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}" class="lista">
+    <a th:href="@{/voluntario/add}" class="botones">Añadir voluntario</a>
+</div>
+<div class="lista">
+    <a th:href="@{/competicion/list}" class="botones">Volver a competiciones</a>
+</div>
+<div class="lista">
+    <a th:href="@{/}" class="botones">Volver al inicio</a>
+</div>
+</div>
+</body>
+</html>

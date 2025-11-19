@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilos.css}" href="/css/estilos.css"
+          rel="stylesheet"/>
+
+</head>
+<body>
+<br>
+<img src="imagenes/logo.jpeg"  width="200" height="200">
+
+<h1>Login</h1>
+<form th:action="@{/login}" th:object="${usuario}" method="post">
+    <label>Email: <input type="text" th:field="*{email}" /></label>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <br/>
+    <label>Contraseña: <input type="password" th:field="*{password}" /></label>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <br/>
+    <input type="submit" value="Iniciar Sesión"/>
+</form>
+<a class="btn btn-primary btn-sm" th:href="@{/usuario/registerAtleta}">¿No tienes cuenta? Regístrate como Atleta</a>
+<a class="btn btn-secondary btn-sm" th:href="@{/usuario/registerPromotor}">¿No tienes cuenta? Regístrate como Promotor</a>
+<br><br>
+
+<a href="/" class="btn btn-secondary btn-sm" role="button">Volver</a>
+
+
+</body>
+</html>

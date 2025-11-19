@@ -1,0 +1,235 @@
+html {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    position: relative;
+    background-color: #1f2533;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../imagenes/fondo.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.botones {
+    margin-top: 50px;
+    background-color: #1f2533;
+    border-radius: 5px;
+    padding: 10px;
+    white-space: nowrap; /* Evita que el texto del botón se parta */
+
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.lista {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    display: flex;           /* Pone los elementos en fila */
+        justify-content: center; /* Centra el grupo de botones */
+        gap: 20px;               /* ¡ESTA ES LA LÍNEA MÁGICA! Crea un espacio de 20px entre los botones */
+        margin-top: 30px;
+}
+
+ul {
+    list-style: none;
+}
+
+nav {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1f2533;
+}
+
+nav * {
+    margin-right: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    width: 100%; /* Hace que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse; /* Mejora la apariencia de los bordes */
+    table-layout: auto; /* Permite que el navegador ajuste las columnas */
+}
+
+.centro {
+    text-align: center;
+}
+
+.pagina-voluntarios {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.pagina-voluntarios h1 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pagina-voluntarios .list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.pagina-voluntarios .list-table th,
+.pagina-voluntarios .list-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.pagina-voluntarios .list-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.pagina-voluntarios .list-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.pagina-voluntarios .list-table tr:hover {
+    background-color: #ddd;
+}
+
+.pagina-voluntarios .action-bar {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagina-voluntarios .botones {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.pagina-voluntarios .botones:hover {
+    background-color: #218838;
+}
+
+.pagina-voluntarios a.action-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.pagina-voluntarios a.action-link.danger {
+    color: #dc3545;
+}
+
+.pagina-voluntarios .empty-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* === ESTILOS AÑADIDOS PARA EL PANEL DE COMPETICIONES === */
+
+.content-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.content-container,
+.content-container td {
+    color: #333;
+}
+
+.content-container h1 {
+    color: #1e3d8f;
+    margin-bottom: 15px;
+}
+
+.content-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.content-container td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.content-container table tr:first-child td {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.content-container .botones {
+    color: white;
+}
+.content-container .lista {
+    margin-bottom: 0; /* Quitamos el margen del div que contiene el h1 */
+}
+
+
+.content-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 0; /* MUY IMPORTANTE: Quitamos cualquier margen superior de la tabla */
+}
+/* Añade esto a tu archivo CSS */
+.page-header {
+    text-align: center;  /* Centra los títulos */
+    margin-bottom: 30px; /* Añade espacio debajo de los títulos */
+}
+
+.page-header h1 {
+    margin-bottom: 8px; /* Espacio pequeño entre el H1 y el H2 */
+}
+
+.page-header h2 {
+    margin: 0;
+    font-size: 1.25em; /* Un poco más pequeño que el H1 */
+    color: #555;      /* Un color más suave para el subtítulo */
+    font-weight: normal;
+}

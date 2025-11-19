@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nueva Competición</title>
+    <meta charset="UTF-8" />
+    <!-- Asegúrate de que este es tu archivo CSS unificado -->
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<!-- 1. Contenedor principal para crear el panel blanco -->
+<div class="content-container form-container">
+
+    <h2>Nueva Competición</h2>
+
+    <form action="#" th:action="@{/competicion/add}" th:object="${competicion}" method="post">
+
+        <input type="hidden" th:field="*{nombre_promotor}"/>
+
+        <!-- 2. Cada grupo de label/input va en un "form-group" -->
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" />
+            <!-- 3. Corregido el error de HTML: se usa un div en vez de un <td> -->
+            <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_in">Fecha Inicio:</label>
+            <input type="date" id="fecha_in" th:field="*{fecha_in}" />
+            <div class="error-message" th:if="${#fields.hasErrors('fecha_in')}" th:errors="*{fecha_in}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_fin">Fecha Fin:</label>
+            <input type="date" id="fecha_fin" th:field="*{fecha_fin}" />
+            <div class="error-message" th:if="${#fields.hasErrors('fecha_fin')}" th:errors="*{fecha_fin}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <!-- 4. Usamos <textarea> para la descripción, es más apropiado -->
+            <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+            <div class="error-message" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+        </div>
+
+        <!-- 5. Agrupamos los botones de acción para un mejor diseño -->
+        <div class="form-actions">
+            <button type="submit" class="botones" onclick="return confirm('Estàs segur de que vols anyadir la competició?');">
+                Añadir Competición
+            </button>
+            <a th:href="@{/competicion/list}" class="botones">Volver</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

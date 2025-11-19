@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirmar Inscripción</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Confirmar Inscripción</h2>
+
+    <form action="#" th:action="@{/inscripcion/add}" th:object="${inscripcion}" method="post">
+
+        <input type="hidden" th:field="*{dniParticipante}" />
+        <input type="hidden" th:field="*{idCarrera}" />
+        <input type="hidden" th:field="*{numeroCamiseta}" />
+        <input type="hidden" th:field="*{fecha}" />
+        <input type="hidden" th:field="*{pago}" />
+
+        <div class="form-group">
+            <label>DNI del Participante:</label>
+            <p class="form-info-text" th:text="*{dniParticipante}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Carrera:</label>
+            <p class="form-info-text" th:text="${nombreCarrera}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Número de Camiseta Asignado:</label>
+            <p class="form-info-text" th:text="*{numeroCamiseta}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Fecha de Inscripción:</label>
+            <p class="form-info-text" th:text="${#temporals.format(inscripcion.fecha, 'dd/MM/yyyy')}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Importe a Pagar:</label>
+            <p class="form-info-text" th:text="*{pago + ' €'}"></p>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones" onclick="return confirm('Estàs segur d\'inscriure\'t?');">
+                Confirmar y Pagar
+            </button>
+            <a href="/" class="botones">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

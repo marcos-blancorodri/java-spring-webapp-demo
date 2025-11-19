@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Sponsor</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Nuevo Sponsor</h2>
+
+    <form action="#" th:action="@{/sponsor/add}" th:object="${sponsor}" method="post">
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}"/>
+            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+                 class="alert alert-danger p-1 mt-1"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="cif">CIF:</label>
+            <input type="text" id="cif" th:field="*{cif}"/>
+            <div th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"
+                 class="alert alert-danger p-1 mt-1"></div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Añadir Sponsor</button>
+            <a href="/sponsor/list" class="botones">Volver a la lista de sponsors</a>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

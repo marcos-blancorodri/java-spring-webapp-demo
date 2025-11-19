@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Registro de Tiempo</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Editar Registro de Tiempo</h2>
+
+    <form action="#" th:action="@{/registroTiempo/update}" th:object="${tiempo}" method="post">
+
+        <input type="hidden" th:field="*{dniParticipante}" />
+        <input type="hidden" th:field="*{punto_control}" />
+        <input type="hidden" th:field="*{idCarrera}" />
+        <input type="hidden" th:field="*{idRegistro}" />
+
+        <div class="form-group">
+            <label>DNI del Participante:</label>
+            <p class="form-info-text" th:text="*{dniParticipante}"></p>
+        </div>
+
+        <div class="form-group">
+            <label>Punto de Control:</label>
+            <p class="form-info-text" th:text="*{punto_control}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="tiempo">Tiempo (HH:mm:ss):</label>
+            <input type="text" id="tiempo" th:field="*{tiempo}" placeholder="00:00:00" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" title="El formato debe ser HH:mm:ss" />
+            <div th:if="${#fields.hasErrors('tiempo')}" th:errors="*{tiempo}" class="error-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="comentario">Comentario:</label>
+            <input type="text" id="comentario" th:field="*{comentario}" />
+            <div th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}" class="error-message"></div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Guardar Cambios</button>
+            <a th:href="@{/registroTiempo/list/{id}(id=${tiempo.punto_control})}" class="botones">Volver</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

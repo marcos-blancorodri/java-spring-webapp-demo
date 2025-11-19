@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Añadir Tarea</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Añadir Tarea a Voluntario</h2>
+    <p style="text-align: center; font-style: italic; color: #666;">
+        Esta página es para una asignación genérica. Probablemente buscabas la página de gestión de tareas desde una competición específica.
+    </p>
+    <hr style="margin-top: 20px; margin-bottom: 30px; border-color: #ddd;">
+
+    <form th:action="@{/voluntarioPuntoControl/add}" th:object="${voluntario}" method="post">
+
+        <input type="hidden" th:field="*{idVoluntario}" />
+        <input type="hidden" id="id_competicion" name="id_competicion" th:value="${id_competicion}" />
+
+        <div class="form-group">
+            <label>ID Voluntario:</label>
+            <p class="form-info-text" th:text="*{idVoluntario}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="idPuntoControl">ID Punto de Control a asignar:</label>
+            <input type="number" id="idPuntoControl" th:field="*{idPuntoControl}" required />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Asignar Tarea</button>
+            <a th:href="@{/voluntario/list/{id}(id=${id_competicion})}" class="botones">Volver</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
