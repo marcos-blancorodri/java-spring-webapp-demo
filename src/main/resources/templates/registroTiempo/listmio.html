@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tiempos</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Mis Tiempos y Resultados</h1></div>
+<div class="lista"><h2><td th:text=" 'Atleta: ' + ${nombre_participante}"></td></h2></div>
+<!-- Solo visible para promotores -->
+<!--
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/puntoControl/add}">Crear posicion</a>
+</div>
+-->
+
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/registroTiempo/add/{idPuntoControl}(idPuntoControl=${idPuntoControl})}">Crear nuevo tiempo</a>
+</div>
+
+<table>
+    <tr>
+        <td>Nombre Carrera</td>
+        <td>Tiempo</td>
+        <td>Nombre Punto de Control</td>
+        <td>Comentarios</td>
+
+    </tr>
+    <tr th:each="registroTiempo : ${tiempos}">
+        <td th:text="${nombresCarreras[registroTiempo.idCarrera]}">Nombre carrera</td>
+        <td th:text="${registroTiempo.tiempo}">Tiempo</td>
+        <td th:text="${nombresPuntosControl[registroTiempo.punto_control]}">Punto de Control</td>
+        <td th:text="${registroTiempo.comentario}">Comentarios</td>
+        <td> <input type = "hidden" th:value="${registroTiempo.dniParticipante}"></td>
+        <td> <input type="hidden" th:value="*{registroTiempo.idCarrera}"/></td>
+        <td> <input type = "hidden" th:value="${registroTiempo.idRegistro}"></td>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/registroTiempo/update/{idRegistro}(idRegistro=${registroTiempo.idRegistro})}" class="botones">Modificar</a>
+        </td>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/registroTiempo/delete/{idRegistro}(idRegistro=${registroTiempo.idRegistro})}" class="botones">Borrar</a>
+        </td>
+
+    </tr>
+</table>
+<div class="lista">
+    <a th:href="@{/}" class="botones">Volver al inicio</a>
+</div>
+</div>
+</body>
+</html>

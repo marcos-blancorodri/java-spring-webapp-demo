@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Inscripción</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Editar Inscripción</h2>
+
+    <form action="#" th:action="@{/inscripcion/update}" th:object="${inscripcion}" method="post">
+
+        <div class="form-group">
+            <label for="dniParticipante">DNI Participante:</label>
+            <input type="text" id="dniParticipante" th:field="*{dniParticipante}" />
+        </div>
+
+        <div class="form-group">
+            <label for="idCarrera">ID Carrera:</label>
+            <input type="number" id="idCarrera" th:field="*{idCarrera}" />
+        </div>
+
+        <div class="form-group">
+            <label for="numeroCamiseta">Número Camiseta:</label>
+            <input type="number" id="numeroCamiseta" th:field="*{numeroCamiseta}" />
+        </div>
+
+        <div class="form-group">
+            <label for="tiempoMeta">Tiempo Meta (segundos):</label>
+            <input type="number" id="tiempoMeta" th:field="*{tiempoMeta}" />
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" th:field="*{fecha}" />
+        </div>
+
+        <div class="form-group">
+            <label for="pago">Pago (€):</label>
+            <input type="number" id="pago" th:field="*{pago}" step="0.01" />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Guardar Cambios</button>
+            <a th:href="@{/inscripcion/list/{idCarrera}(idCarrera=${idCarrera})}" class="botones">Volver</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

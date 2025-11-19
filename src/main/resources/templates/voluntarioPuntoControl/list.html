@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tareas Asignadas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body class="container mt-4">
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<h1>Tareas Asignadas</h1>
+<p>Esta es una lista simple de las tareas asignadas a un voluntario. Para una gestión completa, por favor, acceda desde la lista de voluntarios de una competición.</p>
+
+<div th:if="${voluntarios.isEmpty()}" class="alert alert-info">
+    Este voluntario no tiene tareas asignadas.
+</div>
+
+<table class="table" th:unless="${voluntarios.isEmpty()}">
+    <thead class="thead-light">
+    <tr>
+        <th>Nombre del Punto de Control</th>
+        <th>Ubicación</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tarea : ${voluntarios}">
+        <td th:text="${tarea.nombre}">Nombre Tarea</td>
+        <td th:text="${tarea.ubicacion}">Ubicación Tarea</td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}" class="btn btn-secondary mt-3">Volver al inicio</a>
+</div>
+</body>
+</html>

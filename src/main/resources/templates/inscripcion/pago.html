@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasarela de Pago</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilosPago.css}" href="/css/estilosPago.css"
+          rel="stylesheet"/>
+
+</head>
+<body>
+<div class="container">
+    <h2>¿Quieres proceder con el pago de la inscripción?</h2>
+
+    <div class="form-group">
+        <label for="card-number">Número de tarjeta</label>
+        <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
+    </div>
+
+    <div class="form-group">
+        <label for="expiry-date">Fecha de caducidad</label>
+        <input type="text" id="expiry-date" placeholder="MM/AA">
+    </div>
+
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" placeholder="XXX">
+    </div>
+
+    <div class="button-container">
+        <a style="color:white;" class="btn btn-danger btn-sm" onclick="history.back()">No</a>
+
+        <a class="btn btn-primary btn-sm" th:href="@{|/inscripcion/confirmacion/${inscripcion.idCarrera}/${inscripcion.dniParticipante}|}"
+        >Sí</a>
+    </div>
+
+
+</div>
+</body>
+</html>

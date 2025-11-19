@@ -1,0 +1,93 @@
+html{
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+}
+
+body{
+    /* background-color: #4de2db; <-- ELIMINAMOS ESTA LÍNEA */
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+
+    /* ---- NUEVO: PREPARACIÓN PARA EL FONDO ---- */
+    position: relative; /* Necesario para el pseudoelemento ::before */
+    background-color: #1a1a2e; /* Un color oscuro de respaldo */
+    min-height: 100vh; /* Asegura que el body ocupe al menos toda la pantalla */
+}
+
+/* ---- NUEVO: LA CAPA DEL FONDO TRANSLÚCIDO ---- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Usa la ruta correcta desde la carpeta CSS */
+  background-image: url('../imagenes/fondo.png');
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.3; /* Ajusta la transparencia aquí */
+
+  z-index: -1; /* Envía la capa detrás de todo */
+}
+
+li{
+    margin: 50px;
+    background-color: #1f2533 ;
+    border-radius: 5px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+a{
+    color:white;
+    text-decoration: none;
+}
+
+.lista{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ---- NUEVO: AÑADIMOS ESTILO AL TÍTULO H2 ---- */
+.lista h2 {
+    color: white; /* Hacemos que los títulos "Gestión Promotor", etc. sean blancos */
+    font-size: 2em; /* Opcional: un poco más grande para que destaque */
+    text-shadow: 2px 2px 4px #000000; /* Opcional: una sombra para mejorar legibilidad */
+}
+
+ul{
+    list-style: none;
+    /* MODIFICADO: Quitamos el padding por defecto para centrar mejor */
+    padding: 0;
+}
+
+nav{
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1f2533 ;
+}
+
+nav * {
+    margin-right: 40px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sin-bordes{
+    border : none;
+}

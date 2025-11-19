@@ -1,0 +1,24 @@
+
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0A0F1F;" xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <!-- Logo o título -->
+        <a class="navbar-brand" href="#" style="color: #20E0C2; font-weight: bold;">
+            <img src="/images/logo.jpeg" alt="" width="50" height="50"> MountainRacers
+        </a>
+
+        <!-- Menú de navegación -->
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" th:href="@{/}" style="color: #FFFFFF;">Pàgina principal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" th:href="@{/nadador/list}" style="color: #FFFFFF;">Gestió de Nadadors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" th:href="@{/user/list}" style="color: #FFFFFF;">Àrea privada</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

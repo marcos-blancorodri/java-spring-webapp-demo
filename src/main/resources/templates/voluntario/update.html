@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Voluntario</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Editar Voluntario</h2>
+
+    <form action="#" th:action="@{/voluntario/update}" th:object="${voluntario}" method="post">
+
+        <input type="hidden" th:field="*{idVoluntario}" />
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" />
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha_nacimiento" th:field="*{fecha_nacimiento}" />
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Género:</label>
+            <select id="genero" th:field="*{genero}">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" />
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Guardar Cambios</button>
+            <a th:href="@{/}" class="botones">Volver al Inicio</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

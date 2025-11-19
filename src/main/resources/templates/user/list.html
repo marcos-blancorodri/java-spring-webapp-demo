@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Llista d'usuaris del sistema</title>
+    <meta charset="UTF-8"/>
+    <!-- Afegim una fulla d'estil (Bootstrap) -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+
+
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<h1>Llista d'usuaris del sistema</h1>
+<div th:replace="fragments/logininfo" >...</div>
+<div th:if="${#lists.isEmpty(users)}">
+    No hi ha usuaris
+</div>
+
+
+
+<table th:unless="${#lists.isEmpty(users)}"  class="table table-condensed">
+    <thead>
+    <tr>
+        <th>Nom d'usuari</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.username}"></td>
+    </tr>
+    </tbody>
+</table>
+<a href="/" class="btn btn-primary" role="button">Tornar</a>
+</div>
+</body>
+</html>

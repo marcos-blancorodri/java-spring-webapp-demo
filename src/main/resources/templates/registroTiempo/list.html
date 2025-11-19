@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Tiempos</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Tiempos</h1></div>
+<div class="lista"><h2><td th:text="${nombre_carrera}+ ' - Punto de control ' + ${nombre_puntocontrol}"></td></h2></div>
+<!-- Solo visible para promotores -->
+<!--
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/puntoControl/add}">Crear posicion</a>
+</div>
+-->
+
+
+<table>
+    <tr>
+        <td>Nombre participante</td>
+        <td>Tiempo</td>
+        <td>Comentario</td>
+
+    </tr>
+    <tr th:each="tiempo : ${tiempos}">
+        <td th:text="${tiempo['nombre_participante']}">Nombre</td>
+        <td th:text="${tiempo['tiempo']}">Tiempo</td>
+        <td th:text="${tiempo['comentarios']}">Comentario</td>
+        <input type="hidden" th:value="${tiempo['id_punto_control']}"/>
+        <input type="hidden" th:value="${tiempo['id_carrera']}"/>
+        <input type="hidden" th:value="${tiempo['id_registro']}"/>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/registroTiempo/update/{idRegistro}(idRegistro=${tiempo['id_registro']})}" class="botones">Modificar</a>
+        </td>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/registroTiempo/delete/{idRegistro}(idRegistro=${tiempo['id_registro']})}" class="botones">Borrar</a>
+        </td>
+
+    </tr>
+</table>
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/registroTiempo/add/{idPuntoControl}(idPuntoControl=${idPuntoControl})}" class="botones">Crear nuevo tiempo</a>
+</div>
+
+<div class="lista">
+    <a th:href="@{@{/puntoControl/list/{id}(id=${idCarrera})}}" class="botones">Volver a la lista de puntos de control</a></div>
+</div>
+
+</body>
+</html>

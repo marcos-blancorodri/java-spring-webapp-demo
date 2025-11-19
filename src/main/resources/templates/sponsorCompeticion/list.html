@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sponsors de la Competición</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container">
+
+    <div class="page-header">
+        <h1>Sponsors para la Competición</h1>
+        <h2 th:text="${competicion.nombre}">Nombre de la Competición</h2>
+    </div>
+
+    <table th:if="${not #lists.isEmpty(sponsorsAsignados)}">
+        <thead>
+        <tr>
+            <th>Nombre Sponsor</th>
+            <th>CIF</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sponsor : ${sponsorsAsignados}">
+            <td th:text="${sponsor['nombre']}">Nombre del Sponsor</td>
+            <td th:text="${sponsor['cif']}">CIF del Sponsor</td>
+            <td>
+                <a th:href="@{/sponsorCompeticion/delete/{idCompeticion}/{cifSponsor}(idCompeticion=${competicion.idCompeticion}, cifSponsor=${sponsor['cif']})}"
+                   class="botones"
+                   th:onclick="return confirm('¿Seguro que quieres desasignar este sponsor?');">
+                    Borrar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${#lists.isEmpty(sponsorsAsignados)}" style="text-align: center; margin-top: 20px;">
+        <p>Aún no hay sponsors asignados a esta competición.</p>
+    </div>
+
+
+    <div class="lista">
+        <a th:href="@{/sponsorCompeticion/add/{idCompeticion}(idCompeticion=${competicion.idCompeticion})}" class="botones">Asignar Sponsor Existente</a>
+        <a th:href="@{/competicion/list}" class="botones">Volver a Competiciones</a>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nuevo Punto de Control</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Nuevo Punto de Control</h2>
+
+    <form action="#" th:action="@{/puntoControl/add}" th:object="${puntoControl}" method="post">
+
+        <input type="hidden" th:field="*{idCarrera}"/>
+
+        <div class="form-group">
+            <label>Nombre de la Carrera:</label>
+            <p class="form-info-text" th:text="${nombre_carrera}"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="nombrePuntoControl">Nombre del Punto de Control:</label>
+            <input type="text" id="nombrePuntoControl" th:field="*{nombrePuntoControl}" />
+            <div th:if="${#fields.hasErrors('nombrePuntoControl')}" th:errors="*{nombrePuntoControl}" class="error-message"></div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Añadir Punto de Control</button>
+            <a th:href="@{/puntoControl/list/{id}(id=${puntoControl.idCarrera})}" class="botones">Volver</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

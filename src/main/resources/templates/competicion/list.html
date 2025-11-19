@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Competiciones</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Competiciones</h1></div>
+
+<table>
+    <tr>
+        <td>Nombre</td>
+        <td>Descripcion</td>
+        <td>Fecha inicio</td>
+        <td>Fecha final</td>
+    </tr>
+    <tr th:each="comp : ${competiciones}">
+        <td th:text="${comp.nombre}">Nombre</td>
+        <td th:text="${comp.descripcion}">Descripcion</td>
+        <td th:text="${#temporals.format(comp.fecha_in,'dd-MM-yyyy')}">Fecha inicio</td>
+        <td th:text="${#temporals.format(comp.fecha_fin,'dd-MM-yyyy')}">Fecha fin</td>
+        <td>
+            <a th:href="@{/carrera/list/{id}(id=${comp.idCompeticion})}" class="botones">Ver carreras</a>
+        </td>
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/voluntario/list/{id}(id=${comp.idCompeticion})}" class="botones">Ver Voluntarios</a>
+            </span>
+        </td>
+
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/sponsorCompeticion/list/{idCompeticion}(idCompeticion=${comp.idCompeticion})}" class="botones">Ver Sponsors</a>
+            </span>
+        </td>
+
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/competicion/update/{id}(id=${comp.idCompeticion})}" class="botones">Editar</a>
+            </span>
+        </td>
+        <td>
+            <span th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+                <a th:href="@{/competicion/delete/{id}(id=${comp.idCompeticion})}"
+                   th:onclick="return confirm('Estàs segur d\'esborrar la competició \''
+                    [[${comp.idCompeticion}]] + '\'?');"
+                   class="botones">Borrar</a>
+            </span>
+        </td>
+    </tr>
+</table>
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}" class="lista">
+    <a th:href="@{/competicion/add}" class="botones">Crear nueva competición</a>
+</div>
+<div class="lista">
+
+<a th:href="@{/}" class="botones">Volver al inicio</a>
+</div>
+</div>
+</body>
+</html>

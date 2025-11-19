@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Inscripciones</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Inscripcion</h1></div>
+<table >
+    <tr>
+        <td>Nombre Participante</td>
+        <td>Nombre Carrera</td>
+        <td>Número Camiseta</td>
+        <td>Tiempo Meta</td>
+    </tr>
+
+    <tr th:each="inscripcion: ${inscripciones}">
+        <td th:text="${inscripcion['nombre_participante']}"></td>
+        <td th:text="${nombre_carrera}"></td>
+        <td th:text="${inscripcion['numero_camiseta']}"></td>
+        <td th:text="${inscripcion['tiempo_meta']}"></td>
+        <td> <input type="hidden" th:value="*{inscripcion['id_carrera']}"/></td>
+        <td> <input type="hidden" th:value="*{inscripcion['dniParticipante']}"/></td>
+        <td> <input type="hidden" th:value="*{inscripcion['pago']}"/></td>
+
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/inscripcion/update/{idCarrera}/{dniParticipante}(idCarrera=${inscripcion['id_carrera']}, dniParticipante=${inscripcion['dni_participante']})}"
+               class="botones" role="button">Edita</a>
+        </td>
+
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/inscripcion/delete/{idCarrera}/{dniParticipante}(idCarrera=${inscripcion['id_carrera']}, dniParticipante=${inscripcion['dni_participante']})}"
+               class="botones" role="button" >Borra</a>
+        </td>
+
+    </tr>
+</table>
+<div class="lista">
+    <a th:href="@{'/carrera/list/' + ${idCompeticion}}" class="botones" role="button">Volver a carreras</a>
+</div>
+<div class="lista">
+    <a th:href="@{/}" class="botones">Volver inicio</a>
+</div>
+</div>
+</body>
+</html>
+

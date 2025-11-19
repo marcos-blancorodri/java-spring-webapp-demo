@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inscribir Voluntario</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+    <h2>Inscribir Voluntario a la Competición <span th:text="${competicion.nombre}"></span></h2>
+
+    <form action="#" th:action="@{/voluntario/buscar}" method="post">
+        <input type="hidden" name="idCompeticion" th:value="${competicion.idCompeticion}" />
+        <div class="form-group">
+            <label for="email">Email del Voluntario:</label>
+            <input type="email" id="email" name="email" placeholder="Introduce el email para buscar" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="botones">Buscar Voluntario</button>
+        </div>
+    </form>
+
+    <hr style="margin-top: 40px; border-color: #ddd;">
+
+    <div style="text-align: center; margin-bottom: 15px;">
+        <p>¿El voluntario es nuevo?</p>
+    </div>
+
+    <div class="lista">
+        <a th:href="@{/voluntario/add/{idCompeticion}(idCompeticion=${competicion.idCompeticion})}" class="botones">Crear y Asignar Voluntario</a>
+        <a th:href="@{/competicion/list}" class="botones">Volver a Competiciones</a>
+    </div>
+</div>
+</body>
+</html>

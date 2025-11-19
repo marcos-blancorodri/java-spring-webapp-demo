@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Tareas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body class="container mt-4">
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<!-- Mostramos el nombre del voluntario, eso sí lo tenemos -->
+<h1 th:if="${voluntario != null}" th:text="'Gestionar Tareas para ' + ${voluntario.nombre}">Gestionar Tareas</h1>
+<hr>
+
+<!-- SECCIÓN 1: TAREAS YA ASIGNADAS -->
+<h2 class="mt-4">Tareas Asignadas Actualmente</h2>
+<div th:if="${puntosAsignados == null or puntosAsignados.isEmpty()}" class="alert alert-info">
+    Este voluntario no tiene ninguna tarea asignada.
+</div>
+<table class="table table-striped" th:unless="${puntosAsignados == null or puntosAsignados.isEmpty()}">
+    <thead class="thead-dark">
+    <tr>
+        <th>ID del Punto de Control</th>
+        <th>Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="puntoAsignado : ${puntosAsignados}">
+        <td th:text="${puntoAsignado.idPuntoControl}">101</td>
+        <td>
+            <a th:href="@{/voluntarioPuntoControl/delete/{idVoluntario}/{idPuntoControl}(idVoluntario=${voluntario.idVoluntario}, idPuntoControl=${puntoAsignado.idPuntoControl})}" class="btn btn-danger btn-sm">Desasignar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="card mt-5">
+    <div class="card-body">
+        <h3 class="card-title">Asignar Nueva Tarea</h3>
+        <form th:action="@{/voluntarioPuntoControl/add}" th:object="${nuevaAsignacion}" method="post">
+            <input type="hidden" th:field="*{idVoluntario}" />
+            <input type="hidden" name="idCompeticion" th:value="${idCompeticion}" />
+            <div class="form-group">
+                <label for="puntoControl">Selecciona un Punto de Control Disponible (por ID):</label>
+                <div th:if="${puntosDisponibles == null or puntosDisponibles.isEmpty()}" class="alert alert-warning mt-2">
+                    No hay más puntos de control disponibles para asignar a este voluntario.
+                </div>
+                <select id="puntoControl" th:field="*{idPuntoControl}" class="form-control" th:if="${puntosDisponibles != null and not puntosDisponibles.isEmpty()}">
+                    <option value="0" selected>-- Selecciona un ID --</option>
+
+                    <option th:each="punto : ${puntosDisponibles}"
+                            th:value="${punto.idPuntoControl}"
+                            th:text="'Punto de Control ID: ' + ${punto.idPuntoControl}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" th:if="${puntosDisponibles != null and not puntosDisponibles.isEmpty()}">Asignar Tarea</button>
+        </form>
+    </div>
+</div>
+
+<!-- Enlace para volver -->
+<a th:href="@{/voluntario/list/{idCompeticion}(idCompeticion=${idCompeticion})}" class="btn btn-secondary mt-4">Volver a la lista de Voluntarios</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Missatge d'excepció</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilos.css}" href="/css/estilos.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="alert"
+         th:classappend="${#strings.equals(errorName, 'Error inesperat')} ? 'alert-warning' : 'alert-info'">
+        <h3 th:text="${errorName}"></h3>
+        <p th:text="${message}"></p>
+        <hr>
+        <a href="/" class="btn"
+           th:classappend="${#strings.equals(errorName, 'Error inesperat')} ? 'btn-warning' : 'btn-info'">
+            Anar a l’inici
+        </a>
+    </div>
+</div>
+</body>
+</html>

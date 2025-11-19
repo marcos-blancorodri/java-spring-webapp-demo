@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilos.css}" href="/css/estilos.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<br>
+
+<h1>Registro Promotor</h1>
+<form action="/usuario/registerPromotor" method="post">
+    <label>Email: <input type="text" name="email"/></label><br/>
+    <label>Contraseña: <input type="password" name="password"/></label><br/>
+    <label>Tipo:
+        <select name="tipo">
+            <option value="">-- Selecciona --</option>
+            <option value="normal">Normal</option>
+            <option value="promotor">Promotor</option>
+        </select>
+    </label><br/><br/>
+    <label>Nombre<input type="text" name="nombre"/></label><br/>
+    <label>taxId<input type="text" name="taxid"/></label><br/>
+
+
+    <input type="submit" value="Registrarse"/>
+</form>
+<a class="btn btn-primary btn-sm" href="/login">¿Ya tienes cuenta? Inicia sesión</a>
+<a class="btn btn-secondary btn-sm" href="/">Volver</a>
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Posiciones</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Posicion</h1></div>
+<!-- Solo visible para promotores -->
+<!--
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/puntoControl/add}">Crear posicion</a>
+</div>
+-->
+
+<div th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+    <a th:href="@{/posicion/add}">Crear nuevo punto control</a>
+</div>
+
+<table>
+    <tr>
+        <td>DNI</td>
+        <td>Posicion</td>
+
+    </tr>
+    <tr th:each="posicion : ${posiciones}">
+        <td th:text="${posicion.dni}">DNI</td>
+        <td th:text="${posicion.posicion}">Posicion</td>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/posicion/update/{dni}/{idPuntoControl}(dni=${posicion.dni},idPuntoControl=${posicion.id_punto_control})}" class="botones">Modificar</a>
+        </td>
+        <td th:if="${session.usuario != null and session.usuario.tipo == 'promotor'}">
+            <a th:href="@{/posicion/delete/{dni}/{idPuntoControl}(dni=${posicion.dni},idPuntoControl=${posicion.id_punto_control})}" class="botones">Borrar</a>
+        </td>
+
+    </tr>
+</table>
+<div class="lista">
+    <a th:href="@{/}">Volver al inicio</a>
+</div>
+</div>
+</body>
+</html>

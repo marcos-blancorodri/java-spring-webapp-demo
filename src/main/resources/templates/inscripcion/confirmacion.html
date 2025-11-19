@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Confirmación Inscripción</title>
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="centro">
+
+<h1>¡Enhorabuena!</h1>
+<p>Tu inscripción se ha realizado con éxito para la carrera con ID: <strong th:text="${inscripcion.idCarrera}"></strong></p>
+
+<h3>Datos de tu inscripción:</h3>
+<ul>
+    <li>DNI Participante: <span th:text="${inscripcion.dniParticipante}"></span></li>
+    <li>Número de Camiseta: <span th:text="${inscripcion.numeroCamiseta}"></span></li>
+    <li>Precio de la Carrera: <span th:text="${inscripcion.pago}"></span></li>
+</ul>
+</div>
+    <div class="lista">
+
+<a href="/competicion/list" class="botones" >Volver a la lista de competiciones</a>
+</div>
+</body>
+</html>

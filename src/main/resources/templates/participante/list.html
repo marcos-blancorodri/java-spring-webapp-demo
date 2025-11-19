@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Participantes</title>
+    <meta charset="UTF-8" />
+    <link type="text/css" th:href="@{/css/estilosListas.css}" href="/css/estilosListas.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+<div class="content-container">
+
+<div class="lista"><h1>Participantes</h1></div>
+    <table>
+
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Genero</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        <tr th:each="participante: ${participantes}">
+            <td th:text="${participante.dni}"></td>
+            <td th:text="${participante.nombre}"></td>
+            <td th:text="${participante.edad}"></td>
+            <td th:text="${{participante.genero}}"></td>
+            <td th:text="${{participante.email}}"></td>
+
+            <td>
+                <a th:href="@{/participante/update2/{dni}(dni=${participante.dni})}" class="botones" role="button">Edita</a>
+            </td>
+            <td>
+                <a th:href="@{/participante/delete/{dni}(dni=${participante.dni})}" class="botones" role="button">Borra</a>
+            </td>
+        </tr>
+    </table>
+
+<div class="lista">
+    <a href="add" class="botones" role="button">Añadir participante</a>
+    <br><br>
+    <a href="/" class="botones" role="button">Volver</a>
+</div>
+</div>
+</body>
+</html>

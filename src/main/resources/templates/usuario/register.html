@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link type="text/css" th:href="@{/css/estilos.css}" href="/css/estilos.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<br>
+
+<h1>Registro Atleta</h1>
+<form action="/usuario/registerAtleta" method="post">
+    <label>Email: <input type="text" name="email"/></label><br/>
+    <label>Contraseña: <input type="password" name="password"/></label><br/>
+    <label>Tipo:
+        <select name="tipo">
+            <option value="">-- Selecciona --</option>
+            <option value="normal">Normal</option>
+            <option value="promotor">Promotor</option>
+        </select>
+    </label><br/><br/>
+    <label>DNI <input type="text" name="dni"/></label><br/>
+    <label>Nombre<input type="text" name="nombre"/></label><br/>
+    <label>Edad <input type="number" name="edad"/></label><br/>
+    <label>Genero:
+        <select name="Genero">
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+        </select>
+    </label>
+    <label>Numero federado <input type="text" name="num_federado"/></label><br/>
+
+    <input type="submit" value="Registrarse"/>
+</form>
+<a class="btn btn-primary btn-sm" href="/login">¿Ya tienes cuenta? Inicia sesión</a>
+<a class="btn btn-secondary btn-sm" href="/">Volver</a>
+
+
+</body>
+</html>

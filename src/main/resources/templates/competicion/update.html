@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Competición</title>
+    <!-- Asegúrate de que este es el CSS Unificado -->
+    <link type="text/css" th:href="@{/css/estilosAdd.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+    <a href="/" ><img src="/imagenes/logo.jpeg" alt="Logo" width="100" height="100"> </a>
+    <div class="loggeduser" th:insert="~{/fragments/logininfo :: loginInfo}"></div>
+</nav>
+
+<div class="content-container form-container">
+
+    <h2>Editar Competición</h2>
+
+    <form th:action="@{/competicion/update}" th:object="${competicion}" method="post">
+        <input type="hidden" th:field="*{idCompeticion}"/>
+        <input type="hidden" th:field="*{nombre_promotor}"/>
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" />
+            <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_in">Fecha inicio:</label>
+            <input type="date" id="fecha_in" th:field="*{fecha_in}" />
+            <div class="error-message" th:if="${#fields.hasErrors('fecha_in')}" th:errors="*{fecha_in}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_fin">Fecha fin:</label>
+            <input type="date" id="fecha_fin" th:field="*{fecha_fin}" />
+            <div class="error-message" th:if="${#fields.hasErrors('fecha_fin')}" th:errors="*{fecha_fin}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+            <div class="error-message" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="botones">Guardar cambios</button>
+            <a th:href="@{/competicion/list}" class="botones">Volver al listado</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
